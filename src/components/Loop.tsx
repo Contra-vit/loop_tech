@@ -10,17 +10,21 @@ interface IWorldTime {
     unixtime: number;
     // map:  () => [];
 }
+interface AsyncTodoProps{
+    paramProp: string;
+}
 const Loop: FC<LoopProps> = ({children}) => {
     const [ fetchData, setFetchData ] = useState('')
     let param: string = "Africa/Abidjan"
-    const url: string = `http://worldtimeapi.org/api/timezone/${param}`
+
     useEffect(  () => {
         const delay = (ms: number) => {
             return new Promise<void>(resolve => {
                 setTimeout( ()=> resolve(), ms)
             })
         }
-        async function asyncTodo(){
+        async function asyncTodo(paramProps: string){
+            const url: string = `http://worldtimeapi.org/api/timezone/${paramProps}`
             for(let i = 0; i< 5; i++) {
                 try{
                     await delay(4000)
@@ -33,7 +37,7 @@ const Loop: FC<LoopProps> = ({children}) => {
                 }
             }
         }
-        asyncTodo()
+        asyncTodo(param)
     },[])
     return (
        <div>
